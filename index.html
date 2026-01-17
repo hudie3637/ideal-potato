@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Smart Closet AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CRITICAL: Ensure visibility even if JS fails */
+        html, body { 
+            background-color: #ffffff; 
+            margin: 0; padding: 0; 
+            height: 100%; width: 100%;
+            overflow: hidden;
+        }
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .loader-bar {
+            width: 140px;
+            height: 4px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 24px;
+        }
+        .loader-progress {
+            width: 30%;
+            height: 100%;
+            background: #fde18b;
+            border-radius: 10px;
+            animation: loading 2s ease-in-out infinite;
+        }
+        @keyframes loading {
+            0% { transform: translateX(-100%); width: 30%; }
+            50% { width: 60%; }
+            100% { transform: translateX(200%); width: 30%; }
+        }
+        .fade-out {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
+    "three": "https://esm.sh/three@^0.182.0",
+    "three/examples/jsm/controls/OrbitControls": "https://esm.sh/three@0.182.0/examples/jsm/controls/OrbitControls.js",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "three/": "https://esm.sh/three@^0.182.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="splash-screen">
+        <div class="flex flex-col items-center">
+            <div class="w-16 h-16 bg-[#fde18b] rounded-[24px] flex items-center justify-center mb-6 shadow-2xl shadow-yellow-100">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <h1 class="text-xl font-black tracking-tighter text-gray-900">Smart Closet AI</h1>
+            <p id="status-text" class="text-[9px] font-bold text-gray-400 uppercase tracking-[0.3em] mt-2">Loading Modules...</p>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+    <div id="root"></div>
+    <script>
+        // Fail-safe: If app hasn't loaded in 15 seconds, show hint
+        setTimeout(() => {
+            const status = document.getElementById('status-text');
+            if (status && !document.body.classList.contains('app-ready')) {
+                status.innerText = "Network slow, retrying...";
+                status.className = "text-[9px] font-bold text-orange-400 uppercase tracking-[0.3em] mt-2";
+            }
+        }, 15000);
+    </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "name": "Smart Closet AI",
+  "description": "An AI-powered wardrobe assistant featuring automated background removal, intelligent categorization, and a high-fidelity 3D interactive fitting room.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
