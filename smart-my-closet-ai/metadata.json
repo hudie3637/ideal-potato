@@ -1,0 +1,8 @@
+
+{
+  "name": "Smart My Closet AI",
+  "description": "An intelligent wardrobe application featuring AI background removal, smart categorization, 3D virtual try-on with body analysis, and Veo-powered runway videos.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
